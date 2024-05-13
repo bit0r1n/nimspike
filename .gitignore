@@ -1,0 +1,7 @@
+*.exe
+.env
+Release
+*.dll
+*.so
+aerospike-client-c
+.idea
