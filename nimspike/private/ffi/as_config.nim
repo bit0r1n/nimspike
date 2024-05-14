@@ -20,12 +20,12 @@ type
     node_address*: cstring
     udata*: pointer
     `type`*: as_cluster_event_type
-  # as_cluster_event_callback* = proc (event: as_cluster_event): void
+  as_cluster_event_callback* = proc (event: ptr as_cluster_event) {.cdecl.}
   as_config* {.importc: "struct as_config_s", header: asConfigHeader.} = object
-    hosts*: as_vector_ptr
+    hosts*: ptr as_vector
     user*, password*: cstring
     cluster_name*: cstring
-    # event_callback (proc)
+    event_callback*: as_cluster_event_callback
     # event_callback_udata
     ip_map*: ptr UncheckedArray[as_addr_map]
     ip_map_size*: uint32
@@ -46,46 +46,44 @@ type
     auth_mode*: as_auth_mode
     fail_if_not_connected*, use_services_alternate*, rack_aware*: bool
     rack_id*: cint
-    rack_ids*: as_vector_ptr
+    rack_ids*: ptr as_vector
     use_shm*: bool
     shm_key*: cint
     shm_max_nodes*, shm_max_namespaces*, shm_takeover_threshold_sec*: uint32
-  as_config_ptr* = ptr as_config
 
   as_config_lua* {.importc: "sfail_if_not_connectedtruct as_config_lua_s", header: asConfigHeader.} = object
     cache_enabled*: bool
     user_path*: cstring
-  as_config_lua_ptr* = ptr as_config_lua
 
 # init
-proc as_config_init*(config: as_config_ptr): void {.importc, dynlib: getLibName().}
+proc as_config_init*(config: ptr as_config): void {.importc, dynlib: getLibName().}
 
 # hosts
-proc as_config_add_hosts*(config: as_config_ptr, hosts: cstring, default_port: uint16): bool {.importc, header: asConfigHeader.}
-proc as_config_add_host*(config: as_config_ptr, host: cstring, port: uint16): void {.importc, header: asConfigHeader.}
-proc as_config_clear_hosts*(config: as_config_ptr): void {.importc, header: asConfigHeader.}
+proc as_config_add_hosts*(config: ptr as_config, hosts: cstring, default_port: uint16): bool {.importc, header: asConfigHeader.}
+proc as_config_add_host*(config: ptr as_config, host: cstring, port: uint16): void {.importc, header: asConfigHeader.}
+proc as_config_clear_hosts*(config: ptr as_config): void {.importc, header: asConfigHeader.}
 
 # user
-proc as_config_set_user*(config: as_config_ptr, user: cstring, password: cstring): bool {.importc, header: asConfigHeader.}
+proc as_config_set_user*(config: ptr as_config, user: cstring, password: cstring): bool {.importc, header: asConfigHeader.}
 
 # cluster
-proc as_config_set_cluster_name*(config: as_config_ptr, cluster_name: cstring): void {.importc, header: asConfigHeader.}
-# proc as_config_set_cluster_event_callback*(config: as_config_ptr, callback: as_cluster_event_callback, udata: pointer): void {.importc, header: asConfigHeader.}
+proc as_config_set_cluster_name*(config: ptr as_config, cluster_name: cstring): void {.importc, header: asConfigHeader.}
+proc as_config_set_cluster_event_callback*(config: ptr as_config, callback: as_cluster_event_callback, udata: pointer): void {.importc, header: asConfigHeader.}
 
 # lua
-proc as_config_lua_init*(lua: as_config_lua_ptr): void {.importc, header: asConfigHeader.}
+proc as_config_lua_init*(lua: ptr as_config_lua): void {.importc, header: asConfigHeader.}
 
 # tls
-proc as_config_tls_set_cafile*(config: as_config_ptr, cafile: cstring): void {.importc, header: asConfigHeader.}
-proc as_config_tls_set_castring*(config: as_config_ptr, castring: cstring): void {.importc, header: asConfigHeader.}
-proc as_config_tls_set_capath*(config: as_config_ptr, capath: cstring): void {.importc, header: asConfigHeader.}
-proc as_config_tls_set_protocols*(config: as_config_ptr, protocols: cstring): void {.importc, header: asConfigHeader.}
-proc as_config_tls_set_cipher_suite*(config: as_config_ptr, cipher_suite: cstring): void {.importc, header: asConfigHeader.}
-proc as_config_tls_set_cert_blacklist*(config: as_config_ptr, cert_blacklist: cstring): void {.importc, header: asConfigHeader.}
-proc as_config_tls_set_keyfile*(config: as_config_ptr, keyfile: cstring): void {.importc, header: asConfigHeader.}
-proc as_config_tls_set_keyfile_pw*(config: as_config_ptr, pw: cstring): void {.importc, header: asConfigHeader.}
-proc as_config_tls_set_keystring*(config: as_config_ptr, keystring: cstring): void {.importc, header: asConfigHeader.}
-proc as_config_tls_set_certfile*(config: as_config_ptr, certfile: cstring): void {.importc, header: asConfigHeader.}
-proc as_config_tls_set_certstring*(config: as_config_ptr, certfile: cstring): void {.importc, header: asConfigHeader.}
-proc as_config_tls_add_host*(config: as_config_ptr, address: cstring, tls_name: cstring, port: uint16): void {.importc, header: asConfigHeader.}
-proc as_config_add_rack_id*(config: as_config_ptr, rack_id: cint): void {.importc, header: asConfigHeader.}
+proc as_config_tls_set_cafile*(config: ptr as_config, cafile: cstring): void {.importc, header: asConfigHeader.}
+proc as_config_tls_set_castring*(config: ptr as_config, castring: cstring): void {.importc, header: asConfigHeader.}
+proc as_config_tls_set_capath*(config: ptr as_config, capath: cstring): void {.importc, header: asConfigHeader.}
+proc as_config_tls_set_protocols*(config: ptr as_config, protocols: cstring): void {.importc, header: asConfigHeader.}
+proc as_config_tls_set_cipher_suite*(config: ptr as_config, cipher_suite: cstring): void {.importc, header: asConfigHeader.}
+proc as_config_tls_set_cert_blacklist*(config: ptr as_config, cert_blacklist: cstring): void {.importc, header: asConfigHeader.}
+proc as_config_tls_set_keyfile*(config: ptr as_config, keyfile: cstring): void {.importc, header: asConfigHeader.}
+proc as_config_tls_set_keyfile_pw*(config: ptr as_config, pw: cstring): void {.importc, header: asConfigHeader.}
+proc as_config_tls_set_keystring*(config: ptr as_config, keystring: cstring): void {.importc, header: asConfigHeader.}
+proc as_config_tls_set_certfile*(config: ptr as_config, certfile: cstring): void {.importc, header: asConfigHeader.}
+proc as_config_tls_set_certstring*(config: ptr as_config, certfile: cstring): void {.importc, header: asConfigHeader.}
+proc as_config_tls_add_host*(config: ptr as_config, address: cstring, tls_name: cstring, port: uint16): void {.importc, header: asConfigHeader.}
+proc as_config_add_rack_id*(config: ptr as_config, rack_id: cint): void {.importc, header: asConfigHeader.}

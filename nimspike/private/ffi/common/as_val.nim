@@ -27,22 +27,21 @@ type
     count*: uint32
     `type`*: as_val_t
     free*: bool
-  as_val_ptr* = ptr as_val
 
-proc as_val_type*(v: as_val_ptr): as_val_type_e {.importc, dynlib: getLibName().}
+proc as_val_type*(v: ptr as_val): as_val_type_e {.importc, dynlib: getLibName().}
 
-proc as_val_val_reserve*(v: as_val_ptr): as_val_type_e {.importc, dynlib: getLibName().}
-proc as_val_reserve*(v: as_val_ptr): as_val_ptr {.importc, dynlib: getLibName().}
+proc as_val_val_reserve*(v: ptr as_val): as_val_type_e {.importc, dynlib: getLibName().}
+proc as_val_reserve*(v: ptr as_val): ptr as_val {.importc, dynlib: getLibName().}
 
-proc as_val_val_destroy*(v: as_val_ptr): as_val_ptr {.importc, dynlib: getLibName().}
-proc as_val_destroy*(v: as_val_ptr): as_val_ptr {.importc, dynlib: getLibName().}
+proc as_val_val_destroy*(v: ptr as_val): ptr as_val {.importc, dynlib: getLibName().}
+proc as_val_destroy*(v: ptr as_val): ptr as_val {.importc, dynlib: getLibName().}
 
-proc as_val_val_hashcode*(v: as_val_ptr): uint32 {.importc, dynlib: getLibName().}
-proc as_val_hashcode*(v: as_val_ptr): uint32 {.importc, dynlib: getLibName().}
+proc as_val_val_hashcode*(v: ptr as_val): uint32 {.importc, dynlib: getLibName().}
+proc as_val_hashcode*(v: ptr as_val): uint32 {.importc, dynlib: getLibName().}
 
-proc as_val_val_tostring*(v: as_val_ptr): cstring {.importc, dynlib: getLibName().}
-proc as_val_tostring*(v: as_val_ptr): cstring {.importc, dynlib: getLibName().}
+proc as_val_val_tostring*(v: ptr as_val): cstring {.importc, dynlib: getLibName().}
+proc as_val_tostring*(v: ptr as_val): cstring {.importc, dynlib: getLibName().}
 
 
-proc as_val_init*(v: as_val_ptr, `type`: as_val_t, free: bool): void {.importc, dynlib: getLibName().}
-proc as_val_cons*(v: as_val_ptr, `type`: as_val_t, free: bool): as_val_ptr {.importc, dynlib: getLibName().}
+proc as_val_init*(v: ptr as_val, `type`: as_val_t, free: bool): void {.importc, dynlib: getLibName().}
+proc as_val_cons*(v: ptr as_val, `type`: as_val_t, free: bool): ptr as_val {.importc, dynlib: getLibName().}

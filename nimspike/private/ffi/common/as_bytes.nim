@@ -33,54 +33,53 @@ type
     value*: uint8
     free*: bool
     `type`*: as_bytes_type
-  as_bytes_ptr* = ptr as_bytes
 
-proc as_bytes_init*(bytes: as_bytes_ptr, capacity: uint32): as_bytes_ptr {.importc, dynlib: getLibName().}
-proc as_bytes_init_wrap*(bytes: as_bytes_ptr, value: uint8, size: uint32, free: bool): as_bytes_ptr {.importc, dynlib: getLibName().}
-proc as_bytes_new*(capacity: uint32): as_bytes_ptr {.importc, dynlib: getLibName().}
-proc as_bytes_new_wrap*(value: uint8, size: uint32, free: bool): as_bytes_ptr {.importc, dynlib: getLibName().}
-proc as_bytes_destroy*(bytes: as_bytes_ptr): void {.importc, dynlib: getLibName().}
+proc as_bytes_init*(bytes: ptr as_bytes, capacity: uint32): ptr as_bytes {.importc, dynlib: getLibName().}
+proc as_bytes_init_wrap*(bytes: ptr as_bytes, value: uint8, size: uint32, free: bool): ptr as_bytes {.importc, dynlib: getLibName().}
+proc as_bytes_new*(capacity: uint32): ptr as_bytes {.importc, dynlib: getLibName().}
+proc as_bytes_new_wrap*(value: uint8, size: uint32, free: bool): ptr as_bytes {.importc, dynlib: getLibName().}
+proc as_bytes_destroy*(bytes: ptr as_bytes): void {.importc, dynlib: getLibName().}
 
-proc as_bytes_size*(bytes: as_bytes_ptr): uint32 {.importc, dynlib: getLibName().}
-proc as_bytes_capacity*(bytes: as_bytes_ptr): uint32 {.importc, dynlib: getLibName().}
-proc as_bytes_get_type*(bytes: as_bytes_ptr): as_bytes_type {.importc, dynlib: getLibName().}
-proc as_bytes_set_type*(bytes: as_bytes_ptr, `type`: as_bytes_type): void {.importc, dynlib: getLibName().}
-proc as_bytes_getorelse*(bytes: as_bytes_ptr, fallback: uint8): uint8 {.importc, dynlib: getLibName().}
-proc as_bytes_get*(bytes: as_bytes_ptr): uint8 {.importc, dynlib: getLibName().}
+proc as_bytes_size*(bytes: ptr as_bytes): uint32 {.importc, dynlib: getLibName().}
+proc as_bytes_capacity*(bytes: ptr as_bytes): uint32 {.importc, dynlib: getLibName().}
+proc as_bytes_get_type*(bytes: ptr as_bytes): as_bytes_type {.importc, dynlib: getLibName().}
+proc as_bytes_set_type*(bytes: ptr as_bytes, `type`: as_bytes_type): void {.importc, dynlib: getLibName().}
+proc as_bytes_getorelse*(bytes: ptr as_bytes, fallback: uint8): uint8 {.importc, dynlib: getLibName().}
+proc as_bytes_get*(bytes: ptr as_bytes): uint8 {.importc, dynlib: getLibName().}
 
-proc as_bytes_copy*(bytes: as_bytes_ptr, index: uint32, value: ptr uint8, size: uint32): uint32 {.importc, dynlib: getLibName().}
-proc as_bytes_get_byte*(bytes: as_bytes_ptr, index: uint32, value: ptr uint8): uint32 {.importc, dynlib: getLibName().}
-proc as_bytes_get_int16*(bytes: as_bytes_ptr, index: uint32, value: ptr int16): uint32 {.importc, dynlib: getLibName().}
-proc as_bytes_get_int32*(bytes: as_bytes_ptr, index: uint32, value: ptr int32): uint32 {.importc, dynlib: getLibName().}
-proc as_bytes_get_int64*(bytes: as_bytes_ptr, index: uint32, value: ptr int64): uint32 {.importc, dynlib: getLibName().}
-proc as_bytes_get_double*(bytes: as_bytes_ptr, index: uint32, value: ptr cdouble): uint32 {.importc, dynlib: getLibName().}
-proc as_bytes_get_var_int*(bytes: as_bytes_ptr, index: uint32, value: ptr uint32): uint32 {.importc, dynlib: getLibName().}
+proc as_bytes_copy*(bytes: ptr as_bytes, index: uint32, value: ptr uint8, size: uint32): uint32 {.importc, dynlib: getLibName().}
+proc as_bytes_get_byte*(bytes: ptr as_bytes, index: uint32, value: ptr uint8): uint32 {.importc, dynlib: getLibName().}
+proc as_bytes_get_int16*(bytes: ptr as_bytes, index: uint32, value: ptr int16): uint32 {.importc, dynlib: getLibName().}
+proc as_bytes_get_int32*(bytes: ptr as_bytes, index: uint32, value: ptr int32): uint32 {.importc, dynlib: getLibName().}
+proc as_bytes_get_int64*(bytes: ptr as_bytes, index: uint32, value: ptr int64): uint32 {.importc, dynlib: getLibName().}
+proc as_bytes_get_double*(bytes: ptr as_bytes, index: uint32, value: ptr cdouble): uint32 {.importc, dynlib: getLibName().}
+proc as_bytes_get_var_int*(bytes: ptr as_bytes, index: uint32, value: ptr uint32): uint32 {.importc, dynlib: getLibName().}
 
-proc as_bytes_set*(bytes: as_bytes_ptr, index: uint32, value: ptr uint8, size: uint32): bool {.importc, dynlib: getLibName().}
-proc as_bytes_set_byte*(bytes: as_bytes_ptr, index: uint32, value: uint8): bool {.importc, dynlib: getLibName().}
-proc as_bytes_set_int16*(bytes: as_bytes_ptr, index: uint32, value: int16): bool {.importc, dynlib: getLibName().}
-proc as_bytes_set_int32*(bytes: as_bytes_ptr, index: uint32, value: int32): bool {.importc, dynlib: getLibName().}
-proc as_bytes_set_int64*(bytes: as_bytes_ptr, index: uint32, value: int64): bool {.importc, dynlib: getLibName().}
-proc as_bytes_set_double*(bytes: as_bytes_ptr, index: uint32, value: cdouble): bool {.importc, dynlib: getLibName().}
-proc as_bytes_set_var_int*(bytes: as_bytes_ptr, index: uint32, value: uint32): uint32 {.importc, dynlib: getLibName().}
+proc as_bytes_set*(bytes: ptr as_bytes, index: uint32, value: ptr uint8, size: uint32): bool {.importc, dynlib: getLibName().}
+proc as_bytes_set_byte*(bytes: ptr as_bytes, index: uint32, value: uint8): bool {.importc, dynlib: getLibName().}
+proc as_bytes_set_int16*(bytes: ptr as_bytes, index: uint32, value: int16): bool {.importc, dynlib: getLibName().}
+proc as_bytes_set_int32*(bytes: ptr as_bytes, index: uint32, value: int32): bool {.importc, dynlib: getLibName().}
+proc as_bytes_set_int64*(bytes: ptr as_bytes, index: uint32, value: int64): bool {.importc, dynlib: getLibName().}
+proc as_bytes_set_double*(bytes: ptr as_bytes, index: uint32, value: cdouble): bool {.importc, dynlib: getLibName().}
+proc as_bytes_set_var_int*(bytes: ptr as_bytes, index: uint32, value: uint32): uint32 {.importc, dynlib: getLibName().}
 
-proc as_bytes_append*(bytes: as_bytes_ptr, value: ptr uint8, size: uint32): bool {.importc, dynlib: getLibName().}
-proc as_bytes_append_byte*(bytes: as_bytes_ptr, value: uint8): bool {.importc, dynlib: getLibName().}
-proc as_bytes_append_int16*(bytes: as_bytes_ptr, value: int16): bool {.importc, dynlib: getLibName().}
-proc as_bytes_append_int32*(bytes: as_bytes_ptr, value: int32): bool {.importc, dynlib: getLibName().}
-proc as_bytes_append_int64*(bytes: as_bytes_ptr, value: int64): bool {.importc, dynlib: getLibName().}
-proc as_bytes_append_double*(bytes: as_bytes_ptr, value: cdouble): bool {.importc, dynlib: getLibName().}
+proc as_bytes_append*(bytes: ptr as_bytes, value: ptr uint8, size: uint32): bool {.importc, dynlib: getLibName().}
+proc as_bytes_append_byte*(bytes: ptr as_bytes, value: uint8): bool {.importc, dynlib: getLibName().}
+proc as_bytes_append_int16*(bytes: ptr as_bytes, value: int16): bool {.importc, dynlib: getLibName().}
+proc as_bytes_append_int32*(bytes: ptr as_bytes, value: int32): bool {.importc, dynlib: getLibName().}
+proc as_bytes_append_int64*(bytes: ptr as_bytes, value: int64): bool {.importc, dynlib: getLibName().}
+proc as_bytes_append_double*(bytes: ptr as_bytes, value: cdouble): bool {.importc, dynlib: getLibName().}
 
-proc as_bytes_truncate*(bytes: as_bytes_ptr, n: uint32): bool {.importc, dynlib: getLibName().}
-proc as_bytes_ensure*(bytes: as_bytes_ptr, capacity: uint32, resize: bool): bool {.importc, dynlib: getLibName().}
-proc as_bytes_tobytes*(bytes: as_bytes_ptr, size: ptr uint32): uint8 {.importc, dynlib: getLibName().}
+proc as_bytes_truncate*(bytes: ptr as_bytes, n: uint32): bool {.importc, dynlib: getLibName().}
+proc as_bytes_ensure*(bytes: ptr as_bytes, capacity: uint32, resize: bool): bool {.importc, dynlib: getLibName().}
+proc as_bytes_tobytes*(bytes: ptr as_bytes, size: ptr uint32): uint8 {.importc, dynlib: getLibName().}
 
-proc as_bytes_toval*(bytes: as_bytes_ptr): as_val_ptr {.importc, dynlib: getLibName().}
-proc as_bytes_fromval*(v: as_val_ptr): as_bytes_ptr {.importc, dynlib: getLibName().}
+proc as_bytes_toval*(bytes: ptr as_bytes): ptr as_val {.importc, dynlib: getLibName().}
+proc as_bytes_fromval*(v: ptr as_val): ptr as_bytes {.importc, dynlib: getLibName().}
 
-proc as_bytes_val_destroy*(v: as_val_ptr): void {.importc, dynlib: getLibName().}
-proc as_bytes_val_hashcode*(v: as_val_ptr): uint32 {.importc, dynlib: getLibName().}
-proc as_bytes_val_tostring*(v: as_val_ptr): cstring {.importc, dynlib: getLibName().}
+proc as_bytes_val_destroy*(v: ptr as_val): void {.importc, dynlib: getLibName().}
+proc as_bytes_val_hashcode*(v: ptr as_val): uint32 {.importc, dynlib: getLibName().}
+proc as_bytes_val_tostring*(v: ptr as_val): cstring {.importc, dynlib: getLibName().}
 
 proc as_bytes_to_string*(bytes: ptr uint8, bytes_size: uint32, str: cstring, str_size: uint32): bool {.importc, dynlib: getLibName().}
 proc as_bytes_to_string_with_prefix*(bytes: ptr uint8, bytes_size: uint32, str: cstring, str_size: uint32): bool {.importc, dynlib: getLibName().}
