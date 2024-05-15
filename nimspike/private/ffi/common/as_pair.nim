@@ -15,7 +15,7 @@ proc as_pair_destroy*(pair: ptr as_pair): void {.importc, dynlib: getLibName().}
 proc as_pair_1*(pair: ptr as_pair): ptr as_pair {.importc, dynlib: getLibName().}
 proc as_pair_2*(pair: ptr as_pair): ptr as_pair {.importc, dynlib: getLibName().}
 
-proc as_pair_toval*(boolean: ptr as_pair): ptr as_val {.importc, dynlib: getLibName().}
+proc as_pair_toval*(pair: ptr as_pair): ptr as_val {.importc, dynlib: getLibName().}
 proc as_pair_fromval*(v: ptr as_val): ptr as_pair {.importc, dynlib: getLibName().}
 
 proc as_pair_val_destroy*(v: ptr as_val): void {.importc, dynlib: getLibName().}

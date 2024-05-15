@@ -5,3 +5,4 @@ Release
 *.so
 aerospike-client-c
 .idea
+nimspike/heh

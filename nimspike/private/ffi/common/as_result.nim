@@ -12,7 +12,7 @@ proc as_result_init*(r: ptr as_result): ptr as_result {.importc, dynlib: getLibN
 proc as_result_new*(): ptr as_result {.importc, dynlib: getLibName().}
 proc as_result_reserve*(r: ptr as_result): ptr as_result {.importc, dynlib: getLibName().}
 
-proc as_result_destroy*(pair: ptr as_result): void {.importc, dynlib: getLibName().}
+proc as_result_destroy*(r: ptr as_result): void {.importc, dynlib: getLibName().}
 
 proc as_success_new*(v: ptr as_val): ptr as_result {.importc, dynlib: getLibName().}
 proc as_failure_new*(v: ptr as_val): ptr as_result {.importc, dynlib: getLibName().}

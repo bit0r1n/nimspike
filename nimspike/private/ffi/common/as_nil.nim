@@ -1,5 +1,5 @@
 import ../utils
-from as_val import as_val, as_val_type_e
+from as_val import as_val
 
 # const asNilHeader* = "aerospike/as_nil.h"
 
