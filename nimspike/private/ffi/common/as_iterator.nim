@@ -6,11 +6,11 @@ type
   as_iterator* {.importc: "struct as_iterator_s", header: asIteratorHeader.} = object
     free*: bool
     data*: pointer
-    hooks*: as_iterator_hooks
+    hooks*: ptr as_iterator_hooks
   as_iterator_hooks* {.importc: "struct as_iterator_hooks_s", header: asIteratorHeader.} = object
     destroy*: proc (`iterator`: ptr as_iterator): bool {.cdecl.}
     has_next*: proc (`iterator`: ptr as_iterator): bool {.cdecl.}
-    next*: proc (`iterator`: ptr as_iterator): ptr as_val
+    next*: proc (`iterator`: ptr as_iterator): ptr as_val {.cdecl.}
 
 proc as_iterator_init*(`iterator`: ptr as_iterator, free: bool, data: pointer, hooks: ptr as_iterator_hooks): ptr as_iterator {.importc, dynlib: getLibName().}
 
