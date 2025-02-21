@@ -6,3 +6,5 @@ Release
 aerospike-client-c
 .idea
 nimspike/heh
+nimspike/target
+nimspike/libaerospike.dylib
