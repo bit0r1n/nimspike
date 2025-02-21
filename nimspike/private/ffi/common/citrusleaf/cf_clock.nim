@@ -1,0 +1,1 @@
+type cf_clock* = uint64

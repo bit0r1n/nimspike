@@ -1,7 +1,6 @@
 {.passL: "-lssl -luv -lm -lz -laerospike".}
 
-import asyncdispatch
-import private/ffi/[aerospike, as_config, as_error]
+import private/ffi/[aerospike, as_config, as_error, as_status]
 
 var config: as_config
 as_config_init(addr config)
@@ -17,5 +16,9 @@ var client: aerospike
 discard aerospike_init(addr client, addr config)
 
 var connectError: as_error
-echo aerospike_connect(addr client, addr connectError)
-echo connectError
+let connectStatus = aerospike_connect(addr client, addr connectError)
+
+if connectStatus == AEROSPIKE_OK:
+  echo "connected"
+else:
+  echo connectError

@@ -1,4 +1,4 @@
-import common/as_vector, utils
+import common/aerospike/types/as_vector, utils
 
 const asConfigHeader* = "aerospike/as_config.h"
 
@@ -56,7 +56,7 @@ type
     user_path*: cstring
 
 # init
-proc as_config_init*(config: ptr as_config): void {.importc, dynlib: getLibName().}
+proc as_config_init*(config: ptr as_config): void {.importc, dynlib: asLibName.}
 
 # hosts
 proc as_config_add_hosts*(config: ptr as_config, hosts: cstring, default_port: uint16): bool {.importc, header: asConfigHeader.}
