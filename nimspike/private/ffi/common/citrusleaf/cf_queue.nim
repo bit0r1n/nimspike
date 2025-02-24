@@ -1,7 +1,7 @@
 import ../../utils
 import posix
 
-const cfQueueHeader* = "citrusleaf/cf_queue.h"
+const cfQueueHeader = "citrusleaf/cf_queue.h"
 
 type
   cf_queue_reduce_fn* = proc (buf: pointer, udata: pointer): int {.cdecl.}
@@ -18,7 +18,7 @@ proc cf_queue_init*(q: ptr cf_queue, elements_sz: csize_t, capacity: uint32, thr
 proc cf_queue_create*(element_sz: csize_t, threadsafe: bool): ptr cf_queue {.importc, dynlib: asLibName.}
 proc cf_queue_destroy*(q: ptr cf_queue): void {.importc, dynlib: asLibName.}
 
-proc cf_queue_sz*(q: ptr cf_queue): uint32 {.importc, dynlib: asLibName.}
+proc cf_queue_sz*(q: ptr cf_queue): uint32 {.importc, header: cfQueueHeader.}
 proc cf_queue_push*(q: ptr cf_queue, `ptr`: pointer): cint {.importc, dynlib: asLibName.}
 proc cf_queue_push_limit*(q: ptr cf_queue, `ptr`: pointer, limit: uint32): bool {.importc, dynlib: asLibName.}
 proc cf_queue_push_index*(q: ptr cf_queue, `ptr`: pointer, ix: uint32): cint {.importc, dynlib: asLibName.}

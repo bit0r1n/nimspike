@@ -1,6 +1,6 @@
 import ../../../utils, as_val, as_iterator, as_arraylist
 
-const asArrayListIteratorHeader* = "aerospike/as_arraylist_iterator.h"
+const asArrayListIteratorHeader = "aerospike/as_arraylist_iterator.h"
 
 type
   as_arraylist_iterator* {.importc: "struct as_arraylist_iterator_s", header: asArrayListIteratorHeader.} = object

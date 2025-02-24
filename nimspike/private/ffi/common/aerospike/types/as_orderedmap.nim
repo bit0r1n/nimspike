@@ -1,6 +1,6 @@
 import ../../../utils, as_val, as_iterator, as_pair, as_map
 
-const asOrderedMapHeader* = "aerospike/as_orderedmap.h"
+const asOrderedMapHeader = "aerospike/as_orderedmap.h"
 
 type
   map_entry* {.importc: "struct map_entry_s", header: asOrderedMapHeader.} = object
@@ -27,7 +27,7 @@ proc as_orderedmap_get*(map: ptr as_orderedmap, key: ptr as_val): ptr as_val {.i
 proc as_orderedmap_set*(map: ptr as_orderedmap, key, val: ptr as_val): cint {.importc, dynlib: asLibName.}
 proc as_orderedmap_clear*(map: ptr as_orderedmap): cint {.importc, dynlib: asLibName.}
 proc as_orderedmap_remove*(map: ptr as_orderedmap, key: ptr as_val): cint {.importc, dynlib: asLibName.}
-proc as_orderedmap_set_flags*(map: ptr as_orderedmap, flags: uint32): void {.importc, dynlib: asLibName.}
+proc as_orderedmap_set_flags*(map: ptr as_orderedmap, flags: uint32): void {.importc, header: asOrderedMapHeader.}
 
 proc as_orderedmap_foreach*(map: ptr as_orderedmap, callback: as_map_foreach_callback, udata: pointer): bool {.importc, dynlib: asLibName.}
 proc as_orderedmap_iterator_init*(it: ptr as_orderedmap_iterator, map: ptr as_orderedmap): ptr as_orderedmap_iterator {.importc, dynlib: asLibName.}

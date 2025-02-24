@@ -1,6 +1,6 @@
 import ../../utils, posix, ../citrusleaf/cf_queue
 
-const asThreadPoolHeader* = "aerospike/as_thread_pool.h"
+const asThreadPoolHeader = "aerospike/as_thread_pool.h"
 
 type
   as_task_fn* = proc (user_data: pointer): void {.cdecl.}

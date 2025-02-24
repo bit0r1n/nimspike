@@ -1,6 +1,6 @@
 import ../../utils, as_aerospike, as_udf_context, types/[ as_rec, as_list, as_result, as_stream ]
 
-const asModuleHeader* = "aerospike/as_module.h"
+const asModuleHeader = "aerospike/as_module.h"
 
 type
   as_module_event_type* {.importc: "enum as_module_event_type_e", header: asModuleHeader.} = enum
@@ -18,8 +18,7 @@ type
   as_module_error* {.importc: "struct as_module_error_s", header: asModuleHeader.} = object
     scope*: uint8
     code*, line*: uint32
-    message*: array[1024, char]
-    file*, `func`*: array[256, char]
+    file*, `func`*, message*: cstring
   as_module* {.importc: "struct as_module_s", header: asModuleHeader.} = object
     source*: pointer
     hooks*: as_module_hooks

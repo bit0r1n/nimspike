@@ -1,6 +1,6 @@
 import ../../../utils, as_val
 
-const asIteratorHeader* = "aerospike/as_iterator.h"
+const asIteratorHeader = "aerospike/as_iterator.h"
 
 type
   as_iterator* {.importc: "struct as_iterator_s", header: asIteratorHeader.} = object
@@ -16,5 +16,5 @@ proc as_iterator_init*(`iterator`: ptr as_iterator, free: bool, data: pointer, h
 
 proc as_iterator_destroy*(`iterator`: ptr as_iterator): void {.importc, dynlib: asLibName.}
 
-proc as_iterator_has_next*(`iterator`: ptr as_iterator): bool {.importc, dynlib: asLibName.}
-proc as_iterator_next*(`iterator`: ptr as_iterator): ptr as_val {.importc, dynlib: asLibName.}
+proc as_iterator_has_next*(`iterator`: ptr as_iterator): bool {.importc, header: asIteratorHeader.}
+proc as_iterator_next*(`iterator`: ptr as_iterator): ptr as_val {.importc, header: asIteratorHeader.}

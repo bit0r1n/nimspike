@@ -1,6 +1,6 @@
 import ../../../utils, as_val
 
-const asPairHeader* = "aerospike/as_pair.h"
+const asPairHeader = "aerospike/as_pair.h"
 
 type
   as_pair* {.importc: "struct as_pair_s", header: asPairHeader.} = object
@@ -10,13 +10,13 @@ type
 
 proc as_pair_init*(pair: ptr as_pair, first, second: ptr as_val): ptr as_pair {.importc, dynlib: asLibName.}
 proc as_pair_new*(first, second: ptr as_val): ptr as_pair {.importc, dynlib: asLibName.}
-proc as_pair_destroy*(pair: ptr as_pair): void {.importc, dynlib: asLibName.}
+proc as_pair_destroy*(pair: ptr as_pair): void {.importc, header: asPairHeader.}
 
-proc as_pair_1*(pair: ptr as_pair): ptr as_pair {.importc, dynlib: asLibName.}
-proc as_pair_2*(pair: ptr as_pair): ptr as_pair {.importc, dynlib: asLibName.}
+proc as_pair_1*(pair: ptr as_pair): ptr as_pair {.importc, header: asPairHeader.}
+proc as_pair_2*(pair: ptr as_pair): ptr as_pair {.importc, header: asPairHeader.}
 
-proc as_pair_toval*(pair: ptr as_pair): ptr as_val {.importc, dynlib: asLibName.}
-proc as_pair_fromval*(v: ptr as_val): ptr as_pair {.importc, dynlib: asLibName.}
+proc as_pair_toval*(pair: ptr as_pair): ptr as_val {.importc, header: asPairHeader.}
+proc as_pair_fromval*(v: ptr as_val): ptr as_pair {.importc, header: asPairHeader.}
 
 proc as_pair_val_destroy*(v: ptr as_val): void {.importc, dynlib: asLibName.}
 proc as_pair_val_hashcode*(v: ptr as_val): uint32 {.importc, dynlib: asLibName.}

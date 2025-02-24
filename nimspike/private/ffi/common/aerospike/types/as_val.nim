@@ -1,10 +1,10 @@
 import ../../../utils
 
-const asValHeader* = "aerospike/as_val.h"
+const asValHeader = "aerospike/as_val.h"
 
 type
   as_val_t* = uint8
-  as_val_type_e* {.importc: "enum as_val_type_e" header: asValHeader.} = enum
+  as_val_type_e* {.importc, header: asValHeader.} = enum
     AS_UNDEF = 0
     AS_NIL = 1
     AS_BOOLEAN = 2
@@ -39,9 +39,8 @@ proc as_val_destroy*(v: ptr as_val): ptr as_val {.importc, dynlib: asLibName.}
 proc as_val_val_hashcode*(v: ptr as_val): uint32 {.importc, dynlib: asLibName.}
 proc as_val_hashcode*(v: ptr as_val): uint32 {.importc, dynlib: asLibName.}
 
-proc as_val_val_tostring*(v: ptr as_val): cstring {.importc, dynlib: asLibName.}
-proc as_val_tostring*(v: ptr as_val): cstring {.importc, dynlib: asLibName.}
+proc as_val_val_tostring*(v: ptr as_val): cstring {.importc, header: asValHeader.}
+proc as_val_tostring*(v: ptr as_val): cstring {.importc, header: asValHeader.}
 
-
-proc as_val_init*(v: ptr as_val, `type`: as_val_t, free: bool): void {.importc, dynlib: asLibName.}
-proc as_val_cons*(v: ptr as_val, `type`: as_val_t, free: bool): ptr as_val {.importc, dynlib: asLibName.}
+proc as_val_init*(v: ptr as_val, `type`: as_val_t, free: bool): void {.importc, header: asValHeader.}
+proc as_val_cons*(v: ptr as_val, `type`: as_val_t, free: bool): ptr as_val {.importc, header: asValHeader.}

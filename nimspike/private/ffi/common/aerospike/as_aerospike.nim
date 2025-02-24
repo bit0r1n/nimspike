@@ -1,6 +1,6 @@
 import ../../utils, types/as_rec, ../citrusleaf/cf_clock
 
-const asAerospikeHeader* = "aerospike/as_aerospike.h"
+const asAerospikeHeader = "aerospike/as_aerospike.h"
 
 type
   as_aerospike* {.importc: "struct aerospike_s", header: asAerospikeHeader.} = object
@@ -24,11 +24,11 @@ proc as_aerospike_init*(a: ptr as_aerospike, source: pointer, hooks: ptr as_aero
 proc as_aerospike_new*(source: pointer, hooks: ptr as_aerospike_hooks): ptr as_aerospike {.importc, dynlib: asLibName.}
 proc as_aerospike_destroy*(a: ptr as_aerospike): void {.importc, dynlib: asLibName.}
 
-proc as_aerospike_rec_create*(a: ptr as_aerospike, r: ptr as_rec): cint {.importc, dynlib: asLibName.}
-proc as_aerospike_rec_update*(a: ptr as_aerospike, r: ptr as_rec): cint {.importc, dynlib: asLibName.}
-proc as_aerospike_rec_exists*(a: ptr as_aerospike, r: ptr as_rec): cint {.importc, dynlib: asLibName.}
-proc as_aerospike_rec_remove*(a: ptr as_aerospike, r: ptr as_rec): cint {.importc, dynlib: asLibName.}
-proc as_aerospike_log*(a: ptr as_aerospike, name: cstring, line, lvl: cint, msg: cstring): cint {.importc, dynlib: asLibName.}
-proc as_aerospike_get_current_time*(a: ptr as_aerospike): cf_clock {.importc, dynlib: asLibName.}
-proc as_aerospike_set_context*(a: ptr as_aerospike, r: ptr as_rec, context: uint32): int {.importc, dynlib: asLibName.}
-proc as_aerospike_get_config*(a: ptr as_aerospike, r: ptr as_rec, name: cstring) {.importc, dynlib: asLibName.}
+proc as_aerospike_rec_create*(a: ptr as_aerospike, r: ptr as_rec): cint {.importc, header: asAerospikeHeader.}
+proc as_aerospike_rec_update*(a: ptr as_aerospike, r: ptr as_rec): cint {.importc, header: asAerospikeHeader.}
+proc as_aerospike_rec_exists*(a: ptr as_aerospike, r: ptr as_rec): cint {.importc, header: asAerospikeHeader.}
+proc as_aerospike_rec_remove*(a: ptr as_aerospike, r: ptr as_rec): cint {.importc, header: asAerospikeHeader.}
+proc as_aerospike_log*(a: ptr as_aerospike, name: cstring, line, lvl: cint, msg: cstring): cint {.importc, header: asAerospikeHeader.}
+proc as_aerospike_get_current_time*(a: ptr as_aerospike): cf_clock {.importc, header: asAerospikeHeader.}
+proc as_aerospike_set_context*(a: ptr as_aerospike, r: ptr as_rec, context: uint32): int {.importc, header: asAerospikeHeader.}
+proc as_aerospike_get_config*(a: ptr as_aerospike, r: ptr as_rec, name: cstring) {.importc, header: asAerospikeHeader.}

@@ -1,6 +1,6 @@
 import ../../utils, ../citrusleaf/cf_queue
 
-const asBufferPoolHeader* = "aerospike/as_buffer_pool.h"
+const asBufferPoolHeader = "aerospike/as_buffer_pool.h"
 
 type
   as_buffer_result* {.importc: "struct as_buffer_result_s", header: asBufferPoolHeader.} = object

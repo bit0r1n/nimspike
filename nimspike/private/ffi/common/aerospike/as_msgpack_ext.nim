@@ -1,7 +1,5 @@
 import ../../utils, types/as_val
 
-const asMsgpackExtHeader* = "aerospike/as_msgpack_ext.h"
-
 var
   as_cmp_inf*, as_cmp_wildcard*: as_val
 

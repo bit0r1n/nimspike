@@ -1,6 +1,6 @@
 import ../../utils
 
-const asBufferHeader* = "aerospike/as_buffer.h"
+const asBufferHeader = "aerospike/as_buffer.h"
 
 type
   as_buffer* {.importc: "struct as_buffer_s", header: asBufferHeader.} = object

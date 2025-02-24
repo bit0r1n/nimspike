@@ -1,6 +1,4 @@
-import ../../utils
-
-const asLogHeader* = "aerospike/as_log.h"
+const asLogHeader = "aerospike/as_log.h"
 
 type
   as_log_level* {.importc: "enum as_log_level_e" header: asLogHeader.} = enum
@@ -19,6 +17,6 @@ var
   g_as_log* {.importc, header: asLogHeader.}: ptr as_log
   as_log_level_strings* {.importc: "as_log_level_strings", header: asLogHeader.}: ptr UncheckedArray[cstring]
 
-proc as_log_set_level*(level: as_log_level): void {.importc, dynlib: asLibName.}
-proc as_log_set_callback*(callback: as_log_callback): void {.importc, dynlib: asLibName.}
-proc as_log_level_tostring*(level: as_log_level): cstring {.importc, dynlib: asLibName.}
+proc as_log_set_level*(level: as_log_level): void {.importc, header: asLogHeader.}
+proc as_log_set_callback*(callback: as_log_callback): void {.importc, header: asLogHeader.}
+proc as_log_level_tostring*(level: as_log_level): cstring {.importc, header: asLogHeader.}

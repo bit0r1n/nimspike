@@ -1,6 +1,6 @@
 import ../../../utils, as_val
 
-const asResultHeader* = "aerospike/as_result.h"
+const asResultHeader = "aerospike/as_result.h"
 
 type
   as_result* {.importc: "struct as_result_s", header: asResultHeader.} = object

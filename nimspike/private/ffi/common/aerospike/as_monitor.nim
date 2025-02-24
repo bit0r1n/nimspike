@@ -1,6 +1,6 @@
 import ../../utils, posix
 
-const asMonitorHeader* = "aerospike/as_monitor.h"
+const asMonitorHeader = "aerospike/as_monitor.h"
 
 type
   as_monitor* {.importc, header: asMonitorHeader.} = object

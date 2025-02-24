@@ -1,6 +1,6 @@
-import common/aerospike/types/as_vector, utils
+import common/aerospike/types/as_vector, utils, as_policy
 
-const asConfigHeader* = "aerospike/as_config.h"
+const asConfigHeader = "aerospike/as_config.h"
 
 type
   as_addr_map* {.importc: "struct as_addr_map_s", header: asConfigHeader.} = object
@@ -26,7 +26,7 @@ type
     user*, password*: cstring
     cluster_name*: cstring
     event_callback*: as_cluster_event_callback
-    # event_callback_udata
+    event_callback_udata*: pointer
     ip_map*: ptr UncheckedArray[as_addr_map]
     ip_map_size*: uint32
     min_conns_per_node*, max_conns_per_node*,
@@ -41,7 +41,7 @@ type
       tender_interval*,
       thread_pool_size*: uint32
     tend_thread_cpu*: cint
-    # policies
+    policies*: as_policies
     lua*: as_config_lua
     auth_mode*: as_auth_mode
     fail_if_not_connected*, use_services_alternate*, rack_aware*: bool

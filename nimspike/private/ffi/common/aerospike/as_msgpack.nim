@@ -1,6 +1,6 @@
 import ../../utils, as_serializer, types/as_val
 
-const asMsgpackHeader* = "aerospike/as_msgpack.h"
+const asMsgpackHeader = "aerospike/as_msgpack.h"
 
 type
   as_packer_buffer* {.importc: "struct as_packer_buffer", header: asMsgpackHeader.} = object
@@ -31,12 +31,12 @@ proc as_pack_val*(pk: ptr as_packer, val: ptr as_val): cint {.importc, dynlib: a
 proc as_unpack_val*(pk: ptr as_unpacker, val: ptr UncheckedArray[ptr as_val]): cint {.importc, dynlib: asLibName.}
 proc as_val_cmp*(v1, v2: ptr as_val): msgpack_compare_t {.importc, dynlib: asLibName.}
 
-proc as_pack_nil_size*(): cint {.importc, dynlib: asLibName.}
-proc as_pack_bool_size*(): cint {.importc, dynlib: asLibName.}
+proc as_pack_nil_size*(): cint {.importc, header: asMsgpackHeader.}
+proc as_pack_bool_size*(): cint {.importc, header: asMsgpackHeader.}
 proc as_pack_nil*(pk: ptr as_packer): cint {.importc, dynlib: asLibName.}
 proc as_pack_bool*(pk: ptr as_packer, val: bool): cint {.importc, dynlib: asLibName.}
-proc as_pack_cmp_inf_size*(): uint32 {.importc, dynlib: asLibName.}
-proc as_pack_cmp_wildcard_size*(): uint32 {.importc, dynlib: asLibName.}
+proc as_pack_cmp_inf_size*(): uint32 {.importc, header: asMsgpackHeader.}
+proc as_pack_cmp_wildcard_size*(): uint32 {.importc, header: asMsgpackHeader.}
 proc as_pack_cmp_inf*(pk: ptr as_packer): cint {.importc, dynlib: asLibName.}
 proc as_pack_cmp_wildcard*(pk: ptr as_packer): cint {.importc, dynlib: asLibName.}
 
@@ -45,8 +45,8 @@ proc as_pack_int64_size*(val: int64): uint32 {.importc, dynlib: asLibName.}
 proc as_pack_uint64*(pk: ptr as_packer, val: uint64): cint {.importc, dynlib: asLibName.}
 proc as_pack_int64*(pk: ptr as_packer, val: int64): cint {.importc, dynlib: asLibName.}
 
-proc as_pack_float_size*(): uint32 {.importc, dynlib: asLibName.}
-proc as_pack_double_size*(): uint32 {.importc, dynlib: asLibName.}
+proc as_pack_float_size*(): uint32 {.importc, header: asMsgpackHeader.}
+proc as_pack_double_size*(): uint32 {.importc, header: asMsgpackHeader.}
 proc as_pack_float*(pk: ptr as_packer, val: cfloat): cint {.importc, dynlib: asLibName.}
 proc as_pack_double*(pk: ptr as_packer, val: cdouble): cint {.importc, dynlib: asLibName.}
 
@@ -60,7 +60,7 @@ proc as_pack_bin*(pk: ptr as_packer, buf: ptr uint8, sz: uint32): cint {.importc
 proc as_pack_list_header*(pk: ptr as_packer, ele_count: uint32): cint {.importc, dynlib: asLibName.}
 proc as_pack_list_header_get_size*(ele_count: uint32): uint32 {.importc, dynlib: asLibName.}
 proc as_pack_map_header*(pk: ptr as_packer, ele_count: uint32): cint {.importc, dynlib: asLibName.}
-proc as_pack_map_header_get_size*(ele_count: uint32): uint32 {.importc, dynlib: asLibName.}
+proc as_pack_map_header_get_size*(ele_count: uint32): uint32 {.importc, header: asMsgpackHeader.}
 
 proc as_pack_ext_header_get_size*(content_size: uint32): uint32 {.importc, dynlib: asLibName.}
 proc as_pack_ext_header*(pk: ptr as_packer, content_size: uint32, `type`: uint8): cint {.importc, dynlib: asLibName.}
@@ -88,4 +88,4 @@ proc as_unpack_map_header_element_count*(pk: ptr as_unpacker): int64 {.importc, 
 
 proc as_unpack_buf_compare*(buf1: ptr uint8, size1: uint32, buf2: ptr uint8, size2: uint32): msgpack_compare_t {.importc, dynlib: asLibName.}
 proc as_unpack_compare*(pk1, pk2: ptr as_unpacker): msgpack_compare_t {.importc, dynlib: asLibName.}
-proc as_unpack_buf_is_less*(buf1: ptr uint8, size1: uint32, buf2: ptr uint8, size2: uint32): bool {.importc, dynlib: asLibName.}
+proc as_unpack_buf_is_less*(buf1: ptr uint8, size1: uint32, buf2: ptr uint8, size2: uint32): bool {.importc, header: asMsgpackHeader.}

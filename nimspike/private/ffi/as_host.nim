@@ -1,6 +1,6 @@
 import utils
 
-const asHostHeader* = "aerospike/as_host.h"
+const asHostHeader = "aerospike/as_host.h"
 
 type
   as_host* {.importc: "struct as_host_s", header: asHostHeader.} = object
